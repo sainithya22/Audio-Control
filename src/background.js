@@ -1,6 +1,10 @@
 /// <reference path="../node_modules/chrome-extension-async/chrome-extension-async.d.ts" />
 import "chrome-extension-async";
+<<<<<<< HEAD
 //import Message from './interfaces/Message'
+=======
+
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
 "use strict";
 
 var stored_id = "default";
@@ -14,6 +18,7 @@ chrome.contentSettings["microphone"].set({
   primaryPattern: "*://" + extension_id + "/*",
   setting: "allow",
 });
+<<<<<<< HEAD
 chrome.contentSettings["popups"].set({
   primaryPattern: "*://" + extension_id + "/*",
   setting: "allow",
@@ -35,16 +40,39 @@ chrome.runtime.onMessage.addListener(async function (message, sender, sendRespon
     sendResponse(undefined) // Nothing to send here.
     await setTabVolume(message.tabId, message.value)
     /* Promise.resolve(setTabVolume(message.tabId, message.value))
+=======
+
+// Handle messages from popup
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+  console.log(message);
+  if (message.method == "get-tab-volume") {
+    Promise.resolve(getTabVolume(message.tabId))
+      .then((response) => {
+        console.log("get-tab-volume "+ response);
+      sendResponse(response)})
+      .catch(handleError);
+    //sendResponse(getTabVolume(message.tabId))
+  } else if (message.method == "set-tab-volume") {
+    Promise.resolve(setTabVolume(message.tabId, message.value))
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
       .then((response) => {
         console.log("set-tab-volume "+ response);
         sendResponse(undefined)
       })
+<<<<<<< HEAD
       .catch(handleError); */
+=======
+      .catch(handleError);
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
   } else if (message.method == "AP_get_default_no") {
     console.log('Received message: ' + message.method + ' from frame ' + sender.frameId + ' on tab ' + sender.tab.id);
     if (sender.frameId != 0 ) {
       console.log('Asking top frame: report_sink_no');
+<<<<<<< HEAD
       await chrome.tabs.sendMessage(sender.tab.id,
+=======
+      chrome.tabs.sendMessage(sender.tab.id,
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
         {"message": "report_sink_no"},
         {'frameId': 0},  // request from top frame
         function(response) {
@@ -68,7 +96,11 @@ chrome.runtime.onMessage.addListener(async function (message, sender, sendRespon
     }
   } else if (message.method == "AP_help_with_GUM") {
     console.log('Received message: ' + message.method + ', primaryPattern: ' + message.primaryPattern);
+<<<<<<< HEAD
     await chrome.contentSettings['microphone'].set({'primaryPattern': message.primaryPattern,'setting':'allow'});
+=======
+    chrome.contentSettings['microphone'].set({'primaryPattern': message.primaryPattern,'setting':'allow'});
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
     console.log('Reply with: result: ' + 'Have fun!');
     sendResponse({'result': 'Have fun!'});
   }
@@ -150,7 +182,11 @@ async function handleError(error) {
 
 // We use promises to fight race conditions.
 
+<<<<<<< HEAD
 const tabs={}; 
+=======
+const tabs2={}; 
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
 
 
 //A promise is used to chain asynchronous functions where one function is executed only after success
@@ -165,7 +201,11 @@ const tabs={};
 async function captureTab(tabId) {
   /* var queryOptions = { active: true, currentWindow: true };
   var [tabs] = await chrome.tabs.query(queryOptions); */
+<<<<<<< HEAD
   tabs[tabId] = new Promise(async resolve => {
+=======
+  tabs2[tabId] = new Promise(async (resolve) => {
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
     const stream = await chrome.tabCapture.capture({
       audio: true,
       video: false,
@@ -182,6 +222,7 @@ async function captureTab(tabId) {
     // Source---> Gain node---> Destination
     const gainNode = audioContext.createGain();
 
+<<<<<<< HEAD
     //const waveshaper = audioContext.createWaveShaper();
 
     streamSource.connect(gainNode);
@@ -191,6 +232,16 @@ async function captureTab(tabId) {
     resolve({ audioContext, streamSource, gainNode });
   });
   
+=======
+    const waveshaper = audioContext.createWaveShaper();
+
+    streamSource.connect(gainNode);
+    gainNode.connect(waveshaper);
+    waveshaper.connect(audioContext.destination);
+
+    resolve({ audioContext, streamSource, gainNode });
+  });
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
 }
 
 /**
@@ -200,7 +251,11 @@ async function captureTab(tabId) {
 async function getTabVolume(tabId) {
   /* var queryOptions = { active: true, currentWindow: true };
   var [tabs] = await chrome.tabs.query(queryOptions); */
+<<<<<<< HEAD
   var volume=tabId in tabs ? (await tabs[tabId]).gainNode.gain.value : 1;
+=======
+  var volume=tabId in tabs2 ? (await tabs2[tabId]).gainNode.gain.value : 1;
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
   console.log("Volume" +volume);
   return volume;
 }
@@ -213,11 +268,19 @@ async function getTabVolume(tabId) {
 async function setTabVolume(tabId, value) {
   /* var queryOptions = { active: true, currentWindow: true };
   var [tabs] = await chrome.tabs.query(queryOptions); */
+<<<<<<< HEAD
   if (!(tabId in tabs)) {
     captureTab(tabId);
   }
 
   (await tabs[tabId]).gainNode.gain.value = value;
+=======
+  if (!(tabId in tabs2)) {
+    captureTab(tabId);
+  }
+
+  (await tabs2[tabId]).gainNode.gain.value = value;
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
   updateBadge(tabId, value);
 }
 
@@ -229,7 +292,11 @@ async function setTabVolume(tabId, value) {
 async function updateBadge(tabId,value) {
   /* var queryOptions = { active: true, currentWindow: true };
   var [tabs] = await chrome.tabs.query(queryOptions); */
+<<<<<<< HEAD
   if (tabId in tabs) {
+=======
+  if (tabId in tabs2) {
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
     const text = String(Math.round(value * 100));
     chrome.browserAction.setBadgeText({ text, tabId });
   }
@@ -240,12 +307,17 @@ async function updateBadge(tabId,value) {
  * This function gets called when a tab is closed.
  * @param tabId Tab ID
  */
+<<<<<<< HEAD
 // Clean everything up once the tab is closed
 chrome.tabs.onRemoved.addListener(disposeTab)
+=======
+
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
 
 async function disposeTab(tabId) {
   /* var queryOptions = { active: true, currentWindow: true };
   var [tabs] = await chrome.tabs.query(queryOptions); */
+<<<<<<< HEAD
   if (tabId in tabs) {
     (await tabs[tabId]).audioContext.close();
     delete tabs[tabId];
@@ -261,6 +333,14 @@ function init() {
 }
 
 
+=======
+  if (tabId in tabs2) {
+    (await tabs2[tabId]).audioContext.close();
+    delete tabs2[tabId];
+  }
+}
+
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
 chrome.storage.local.get("AP_default_no", function (result) {
   stored_no = result["AP_default_no"];
   if (!stored_no) {
@@ -271,5 +351,16 @@ chrome.storage.local.get("AP_default_no", function (result) {
   //return output_stored_no;
 });
 
+<<<<<<< HEAD
 init();
+=======
+// -- Initialize device_cache (list of available devices)
+function init() {
+  var default_no = document.getElementById("default_no") ;
+  default_no.value = stored_no;  
+  navigator.mediaDevices.enumerateDevices().then(getDevices).catch(handleError);
+}
+
+//init();
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
 //start();

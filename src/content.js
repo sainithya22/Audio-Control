@@ -86,7 +86,11 @@ function check_node(node) {
 }
 
 // -- Request the default sink_no from the background
+<<<<<<< HEAD
 function request_default_no() {
+=======
+async function request_default_no() {
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
 	console.log('Requesting default_no ...');
 	chrome.runtime.sendMessage({'method': 'AP_get_default_no'},
 		function(response) {

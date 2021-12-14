@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var bg = chrome.extension.getBackgroundPage();
  
 // -- Help the background page in retrieving devices and update the default device selection page 
@@ -99,12 +100,25 @@ init();
 
 
 /* var bg = chrome.extension.getBackgroundPage();
+=======
+/*
+ * $Id: options.js 36 2016-05-15 23:06:46Z  $
+ */
+ 
+var bg = chrome.extension.getBackgroundPage();
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
 var default_no = bg.document.getElementById("default_no");
 var sink_no = default_no.value;
 
  
 // -- Help the background page in retrieving devices and update the default device selection page 
+<<<<<<< HEAD
  function init() { 	
+=======
+ function init() {
+ 	// We could include the around 2500 lines of code from WebRTCs "adapter.js"
+	// and then call "navigator.mediaDevices.getUserMedia()", but why should we?
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
 	navigator.webkitGetUserMedia(
 		{
 			audio:true,
@@ -202,4 +216,7 @@ function getDevices(deviceInfos) {
 
 // -- main ---------------------------------------------------------------
 init();
+<<<<<<< HEAD
  */
+=======
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65

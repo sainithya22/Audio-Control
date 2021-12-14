@@ -1,10 +1,16 @@
 /// <reference path="../node_modules/chrome-extension-async/chrome-extension-async.d.ts" />
 import 'chrome-extension-async' //to be able to write async await functions to the extension
 
+<<<<<<< HEAD
 //import Message from './interfaces/Message'
 import { MDCSlider } from '@material/slider'
 
 'use strict';
+=======
+import Message from './interfaces/Message'
+import { MDCSlider } from '@material/slider'
+
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
 
 var bg = chrome.extension.getBackgroundPage();
 var default_no = bg.document.getElementById("default_no");
@@ -20,7 +26,11 @@ const sliderElem= document.getElementById('volume-slider')
 
 const slider = new MDCSlider(sliderElem)
 
+<<<<<<< HEAD
 void(async ()=>{
+=======
+async function init(){
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
   // Hide the slider until we know the initial volume
   sliderElem.style.opacity = '0'
 
@@ -47,7 +57,11 @@ void(async ()=>{
 		}
 	)
 
+<<<<<<< HEAD
 })();
+=======
+}
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
 
 //to make the slider listen to thumb change
 slider.listen('MDCSlider:input', () => {
@@ -270,7 +284,12 @@ else {
 
     sliderElem.style.opacity = '1'
   
+<<<<<<< HEAD
   }) */ 
+=======
+  }) */
+  
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
  	
 
 
@@ -292,3 +311,7 @@ function output_onchange(e) {
 
 //audioInputSelect.onchange = start;
 //audioOutputSelect.onchange = attachSinkId;
+<<<<<<< HEAD
+=======
+init();
+>>>>>>> 7927d7820043bcf538d245413c611bc0fb71da65
