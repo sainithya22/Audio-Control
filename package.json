@@ -1,0 +1,51 @@
+{
+  "name": "audio-control",
+  "version": "1.0.0",
+  "description": "Chrome extension to control any tab's volume separately along with choosing the output device",
+  "files": [
+    "dist",
+    "!*.map"
+  ],
+  "scripts": {
+    "build": "parcel build src/popup.html src/options.html src/background.html src/content.js",
+    "watch": "parcel watch src/popup.html src/options.html src/background.html src/content.js"
+  },  
+  "devDependencies": {
+    "@types/material-components-web": "^0.43.1",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "parcel-bundler": "^1.12.5",
+    "parcel-plugin-static-files-copy": "^2.2.1",
+    "sass": "^1.23.2",
+    "tslint": "^5.20.0",
+    "tslint-config-standeerd": "^4.0.0",
+    "typescript": "^3.6.4",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "babel-register": "^6.26.0",
+    "chromedriver": "^76.0.1",
+    "eslint-config-google": "^0.14.0",
+    "extend": "^3.0.2",
+    "fs": "0.0.2",
+    "geckodriver": "^1.19.1",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-eslint": "^6.0.0",
+    "gulp-exec": "^4.0.0",
+    "gulp-nightwatch": "^1.1.0",
+    "gulp-stylelint": "^9.0.0",
+    "gulp-zip": "^5.0.0",
+    "http-server": "^0.12.3",
+    "lodash": "^4.17.15",
+    "lodash.template": "^4.5.0",
+    "minimatch": "^3.0.4",
+    "nightwatch": "^1.5.1",
+    "selenium-server": "^3.141.59",
+    "stylelint": "^10.1.0",
+    "stylelint-config-recommended": "^2.2.0"
+  },
+  "dependencies": {
+    "chrome-extension-async": "^3.4.1",
+    "implement-js": "0.0.31",
+    "material-components-web": "^3.2.0"
+  }
+}

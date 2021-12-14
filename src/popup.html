@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="./popup.scss">
+
+<style type="text/css">
+html,body {
+height: 100%;
+width:auto;
+position: relative
+}
+ul {margin-top:0em; margin-bottom:0.5em;}
+li {padding:0.125em;}
+label {white-space:nowrap; vertical-align:bottom; padding:0.25em; margin-right:0em;}
+input[type=radio] {vertical-align:bottom; margin-left:0.75em; margin-right:0em;}
+button[type=button] {margin-right:0em; margin-top:0.5em;}
+</style>
+
+</style>
+</head>
+
+
+<body>
+  
+  <main>
+    <div class="myBox">
+    <!-- The slider -->
+    <div id="volume-slider" class="mdc-slider" aria-valuemin="0" aria-valuemax="600" aria-valuenow="100" data-step="5"
+      tabindex="0" role="slider" aria-label="Select Volume">
+      <div class="mdc-slider__track-container">
+        <div class="mdc-slider__track"></div>
+      </div>
+      <div class="mdc-slider__thumb-container">
+        <svg class="mdc-slider__thumb" width="21" height="21">
+          <circle cx="10.5" cy="10.5" r="7.875"></circle>
+        </svg>
+        <div class="mdc-slider__focus-ring"></div>
+      </div>
+    </div>
+
+    <p  style="color: white;">Select output device for the current tab</p>
+    
+    <div id="device_options" style="color: white;"></div>
+  </div>
+
+  </main>
+
+  
+  <script src="./popup.js" async></script>
+</body>
+
+</html>
